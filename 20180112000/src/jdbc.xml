@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jdbc>
+	<!-- 手动创建 -->
+	<connection>
+		<driver>org.gjt.mm.mysql.Driver</driver>
+		<url>jdbc:mysql://localhost:3306/heyman</url>
+		<username>root</username>
+		<password>000</password>
+	</connection>
+	
+	<!-- 使用连接池获得连接，手动创建连接池并管理 -->
+		<pool class="org.apache.commons.dbcp2.BasicDataSource"> <!-- 连接池对象 -->
+			<property name="driverClassName" value="org.gjt.mm.mysql.Driver"/>
+			<property name="url" value="jdbc:mysql://localhost:3306/heyman" />
+			<property name="username" value="root" />
+			<property name="password" value="000" />
+			
+			
+		</pool>
+	<!-- 将连接池交给Tomcat管理 -->
+		<jndi name="mysql/heyman">
+			
+		</jndi>
+	
+</jdbc>
