@@ -1,0 +1,4 @@
+<?xml version="1.0"?>
+<jdbc>
+	<jndi name="mysql/heyman"></jndi>
+</jdbc>

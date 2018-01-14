@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<mvc>
+	<constant name="encoding" value="utf-8"/>
+	<constant name="reload" value="ture"/>
+	<!-- 全局设置-->
+	
+	<action name="save" class="com.action.CarAction" method="save">
+	</action>
+	<action name="show" class="com.action.CarAction" method="show">
+		<result name="show" type="dispatcher" >show.jsp</result>
+	</action>	
+	
+	
+	
+</mvc>
