@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.domain">
+	<class name="Builder" table="t_builder">
+		<id name="bid"></id>
+		<property name="bname"></property>
+		<property name="fid" insert="false" update="false"></property>
+		
+		<many-to-one name="factory" class="Factory" column="fid"></many-to-one>
+	</class>
+</hibernate-mapping>

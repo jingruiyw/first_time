@@ -32,10 +32,9 @@ public class CarAction {
 		return cars;//相当于request.attribute("cars",cars);数据装载
 	}
 	
-	private CarService service = new CarService();
+	private CarService service;
 	public String show(){
 		cars = service.findCarAll();
-		System.out.println(cars);
 		return "show";//转发的方式，框架做
 	}
 	@ResponseBody

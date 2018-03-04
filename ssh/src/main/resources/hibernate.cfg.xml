@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+	"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+	<!-- 实现spring管理hibernate的SessionFactory -->
+	
+	<session-factory>
+		<property name="dialect" >org.hibernate.dialect.Oracle10gDialect</property>
+		<property name="show_sql">true</property>
+		
+		<mapping resource="mapper/factory.hbm.xml"></mapping>
+		<mapping resource="mapper/builder.hbm.xml"></mapping>
+	</session-factory>
+
+	
+</hibernate-configuration>

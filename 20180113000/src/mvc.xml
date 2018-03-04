@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <mvc>
 	<constant name="encoding" value="utf-8"/>
-	<constant name="reload" value="ture"/>
+	<constant name="reload" value="true"/>
 	<!-- 全局设置-->
 	
 	<action name="save" class="com.action.CarAction" method="save">

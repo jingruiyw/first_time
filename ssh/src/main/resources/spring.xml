@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:mvc="http://www.springframework.org/schema/mvc"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xsi:schemaLocation=
+    "http://www.springframework.org/schema/beans
+	 http://www.springframework.org/schema/beans/spring-beans.xsd
+	 http://www.springframework.org/schema/context
+	 http://www.springframework.org/schema/context/spring-context.xsd
+	 http://www.springframework.org/schema/mvc
+	 http://www.springframework.org/schema/mvc/spring-mvc.xsd
+	 http://www.springframework.org/schema/tx
+	 http://www.springframework.org/schema/tx/spring-tx.xsd
+	 http://www.springframework.org/schema/aop
+	 http://www.springframework.org/schema/aop/spring-aop.xsd
+	">
+		<!-- 注解编程 ioc di aop-->
+		<context:component-scan base-package="com.action,com.service.impl,com.dao.impl"></context:component-scan>
+		
+		<!-- 关联资源文件 -->
+		<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+			<property name="locations" value="classpath:db-config.properties"></property>
+		</bean>
+		
+		<!-- 数据源 -->
+		<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
+			<property name="driverClassName" value="${driver}"></property>
+			<property name="url" value="${url}"></property>
+			<property name="username" value="${username}"></property>
+			<property name="password" value="${password}"></property>
+			<property name="maxTotal" value="${maxTotal}"></property>
+		</bean>
+		
+		<!-- hibernate的Session工厂,需要数据源 -->
+		<bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+			<!-- 给他一个数据源 -->
+			<property name="dataSource" ref="dataSource"></property>
+			<!-- hibernate的配置文件 -->
+			<property name="configLocations" value="classpath:hibernate.cfg.xml" ></property>
+		</bean>
+		
+		<!-- spring管理事务 ，需要工厂 -->
+		<bean id="manager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+			<property name="sessionFactory" ref="sessionFactory"></property>
+		</bean>
+		
+		<!-- 事务。需要管理者 -->
+		<tx:advice id="txAdvice" transaction-manager="manager">
+			<tx:attributes>
+				<tx:method name="save*" isolation="DEFAULT" propagation="REQUIRED" rollback-for="java.lang.Exception"></tx:method>
+				<tx:method name="update*" isolation="DEFAULT" propagation="REQUIRED" rollback-for="java.lang.Exception"></tx:method>
+				<tx:method name="delete*" isolation="DEFAULT" propagation="REQUIRED" rollback-for="java.lang.Exception"></tx:method>
+				<tx:method name="show*" isolation="DEFAULT" propagation="REQUIRED" rollback-for="java.lang.Exception"></tx:method>
+			</tx:attributes>
+		</tx:advice>
+		
+		<!-- 切面，设置切入点 -->
+		<aop:config>
+			<aop:advisor advice-ref="txAdvice" pointcut="execution(* com.service.impl.*.*(..))"/>
+		</aop:config>
+	</beans>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
